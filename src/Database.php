@@ -57,14 +57,24 @@ class Database {
 
     }
 
+    public function def() {
+        return $this->def;
+    }
+
+    public function operators() {
+        return $this->def->pluck( 'operator' )->unique()->values();
+    }
+
     public function regions() {
         return $this->def->pluck( 'region' )->unique()->values();
     }
 
+    public function operatorByPhoneNumber( $phone ) {
+        return Arr::get( $this->findByPhoneNumber( $phone ), 'operator' );
+    }
+
     public function regionByPhoneNumber( $phone ) {
-
         return Arr::get( $this->findByPhoneNumber( $phone ), 'region' );
-
     }
 
     public function findByPhoneNumber( $phone ) {
